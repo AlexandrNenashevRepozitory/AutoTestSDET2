@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import tests.TestBase;
 
 
 import java.util.List;
@@ -15,13 +16,13 @@ import java.util.stream.Collectors;
 
 public class SortCustomerPage {
 
-    private final WebDriver driver;  // Локальная переменная для WebDriver
+    private final WebDriver driver;
+    TestBase testBase = new TestBase();
 
-    // Конструктор принимает WebDriver и инициализирует элементы страницы
     public SortCustomerPage(WebDriver driver) {
-        this.driver = driver;  // Инициализация локальной переменной
+        this.driver = driver;
         PageFactory.initElements(driver, this);
-        driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager");
+        driver.get(testBase.url);
     }
 
 
@@ -32,7 +33,7 @@ public class SortCustomerPage {
     @FindBy(xpath = "//*[@ng-click=\"sortType = 'fName'; sortReverse = !sortReverse\"]")
     private static WebElement SortCustomer;
 
-    @FindBy(css = "tbody tr td:nth-child(1)") // Первый столбец таблицы (имена)
+    @FindBy(css = "tbody tr td:nth-child(1)")
     private List<WebElement> customerNameElements;
 
 
@@ -42,7 +43,7 @@ public class SortCustomerPage {
     }
 
     public void clickSortCustomer() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));  // Ожидание до 10 секунд
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         wait.until(ExpectedConditions.elementToBeClickable(SortCustomer));
         SortCustomer.click();
         SortCustomer.click();

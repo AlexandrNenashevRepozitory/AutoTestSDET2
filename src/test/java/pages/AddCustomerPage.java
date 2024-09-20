@@ -5,20 +5,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import tests.TestBase;
 
+import java.net.URL;
 import java.util.Random;
 
 
 public class AddCustomerPage {
 
-    private final WebDriver driver; // Локальная переменная для WebDriver
+    private final WebDriver driver;
+    TestBase testBase = new TestBase();
 
-
-    // Конструктор принимает WebDriver и инициализирует элементы страницы
     public AddCustomerPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager");
+        driver.get(testBase.url);
     }
 
 
@@ -67,7 +68,6 @@ public class AddCustomerPage {
         for (int i = 0; i <= 9; i++) {
             int number = r.nextInt(9);
             postCode.append(number);
-            System.out.println(postCode);
         }
         return postCode.toString();
     }
@@ -79,7 +79,6 @@ public class AddCustomerPage {
         for (int i = 0; i < postCode.length(); i += 2) {
             int digit = Integer.parseInt(postCode.substring(i, i + 2)) % 26;
             firstName.append((char) ('a' + digit));
-            System.out.println(firstName);
         }
         return firstName.toString();
     }

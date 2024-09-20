@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 public class SortCustomerTest extends TestBase {
 
     @Test
-    @Step
-    @DisplayName("Проверка алгоритма сортировки списка в алафвитном порядке по полю 'First Name'")
+    @Step("Список клиентов отсортирован по имени")
+    @DisplayName("Проверка сортировки клиентов по имени в таблице Customers")
     public void checkSortAlphabet() {
         SortCustomerPage sortCustomerPage = new SortCustomerPage(driver);
         sortCustomerPage.clickMenuSortCustomer();

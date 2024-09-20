@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import tests.TestBase;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,14 +13,13 @@ import java.util.stream.Collectors;
 
 public class DeleteCustomerPage {
 
-    private final WebDriver driver; // Локальная переменная для WebDriver
+    private final WebDriver driver;
+    TestBase testBase = new TestBase();
 
-
-    // Конструктор принимает WebDriver и инициализирует элементы страницы
     public DeleteCustomerPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager");
+        driver.get(testBase.url);
     }
 
 
@@ -27,12 +27,10 @@ public class DeleteCustomerPage {
     @FindBy(css = "[ng-click='showCust()']")
     private WebElement MenuCustomers;
 
-    // Список элементов с именами клиентов (первый столбец)
     @FindBy(css = "tbody tr td:nth-child(1)")
     private List<WebElement> NameElements;
 
-    // Первый столбец таблицы Customers
-    @FindBy(css = "tbody tr td:nth-child(1)") // Первый столбец таблицы (имена)
+    @FindBy(css = "tbody tr td:nth-child(1)")
     private List<WebElement> customerNameElements;
 
 
@@ -58,30 +56,28 @@ public class DeleteCustomerPage {
                 .average()
                 .orElse(0);
 
-        String nameToDelete = "";      // Переменная для хранения имени, которое будем удалять
-        int smallestDifference = Integer.MAX_VALUE;     // Изначально задаём максимальную разницу
+        String nameToDelete = "";
+        int smallestDifference = Integer.MAX_VALUE;
 
         // Поиск имени с длиной, близкой к средней
         for (String name : names) {
-            int lengthDifference = Math.abs(name.length() - average);  // Вычисляем разницу длины имени со средним значением
+            int lengthDifference = Math.abs(name.length() - average);
 
             // Если текущая разница меньше предыдущей минимальной разницы, запоминаем это имя
             if (lengthDifference < smallestDifference) {
-                smallestDifference = lengthDifference;  // Обновляем минимальную разницу
-                nameToDelete = name;  // Запоминаем имя для удаления
+                smallestDifference = lengthDifference;
+                nameToDelete = name;
             }
         }
-        return nameToDelete;  // Возвращаем имя, которое будет удалено
+        return nameToDelete;
     }
 
 
-    // Поиск строки для удаления
     public WebElement findButtonDelete(String nameToDelete) {
         return driver.findElement(By.xpath("//td[text()='" + nameToDelete + "']/following-sibling::td/button[contains(text(),'Delete')]"));
     }
 
 
-    // Удаление строки
     public void clickDeleteName(String nameToDelete) {
         findButtonDelete(nameToDelete).click();
     }

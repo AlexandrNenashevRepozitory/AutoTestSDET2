@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.net.URL;
 import java.time.Duration;
 
 public class TestBase {
@@ -14,6 +15,8 @@ public class TestBase {
     public static void setDriver(WebDriver webDriver) {
         driver = webDriver;
     }
+
+    public String url = "https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager";
 
     @Before
     public void setUP() {

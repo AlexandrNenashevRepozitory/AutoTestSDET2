@@ -13,44 +13,9 @@ import java.util.List;
 
 
 public class AddCustomerTest extends TestBase {
-    @Test
-    @Step
-    @DisplayName("Проверка алгоритма заполнение полей 'First Name', 'Post Code'")
-    public void addCustomerTest() {
-        AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
-        String postCode = addCustomerPage.generatePostCode();
-        String firstName = addCustomerPage.generateFirstName(postCode);
-        addCustomerPage.clickMenuButtonAddCustomer();
-        addCustomerPage.inputFirstName(firstName);
-        addCustomerPage.inputLastName("TestLastName");
-        addCustomerPage.inputPostCode(postCode);
-        addCustomerPage.clickSubmitAddCustomer();
-    }
-
 
     @Test
-    @Step
-    @DisplayName("Проверка длинны 'PostCode' == 10 ")
-    public void generatePostCodeTest() {
-        AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
-        String postCode = addCustomerPage.generatePostCode();
-        Assert.assertEquals(postCode.length(), 10);
-    }
-
-
-    @Test
-    @Step
-    @DisplayName("Проверка длинны 'FirstName' == 5")
-    public void generateFirstNameTest() {
-        AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
-        String postCode = addCustomerPage.generatePostCode();
-        String firstName = addCustomerPage.generateFirstName(postCode);
-        Assert.assertEquals(firstName.length(), 5);
-    }
-
-
-    @Test
-    @Step
+    @Step("Новый пользователь добавлен")
     @DisplayName("Проверка добавления нового пользователя")
     public void addUserCustomerTest() {
         AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
@@ -69,6 +34,27 @@ public class AddCustomerTest extends TestBase {
         sortCustomerPage.clickMenuSortCustomer();
         List<String> extendedCustomerNames = sortCustomerPage.getCustomerNames();
         Assert.assertEquals(customerNames.size(), extendedCustomerNames.size() - 1);
+    }
+
+
+    @Test
+    @Step("Длина почтового индекса 10 знаков")
+    @DisplayName("Проверка длины почтового индекса")
+    public void generatePostCodeTest() {
+        AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
+        String postCode = addCustomerPage.generatePostCode();
+        Assert.assertEquals(postCode.length(), 10);
+    }
+
+
+    @Test
+    @Step("Длина имени 5 знаков")
+    @DisplayName("Проверка длины имени")
+    public void generateFirstNameTest() {
+        AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
+        String postCode = addCustomerPage.generatePostCode();
+        String firstName = addCustomerPage.generateFirstName(postCode);
+        Assert.assertEquals(firstName.length(), 5);
     }
 
 }

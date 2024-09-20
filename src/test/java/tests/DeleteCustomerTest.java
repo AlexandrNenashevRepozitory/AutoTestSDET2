@@ -12,19 +12,8 @@ import java.util.List;
 public class DeleteCustomerTest extends TestBase {
 
     @Test
-    @Step
-    @DisplayName("Проверка алгоритма удаления пользователя")
-    public void deleteCustomerTest() {
-        DeleteCustomerPage deleteCustomerPage = new DeleteCustomerPage(driver);
-        deleteCustomerPage.clickMenuSortCustomer();
-        List<String> customerNames = deleteCustomerPage.getCustomerNames();
-        String nameToDelete = deleteCustomerPage.nameToDelete(customerNames);
-        deleteCustomerPage.clickDeleteName(nameToDelete);
-    }
-
-    @Test
-    @Step
-    @DisplayName("Проверяем удалён ли пользователь")
+    @Step("Пользователь удалён")
+    @DisplayName("Проверка удаления пользователя")
     public void deleteCustomerUserTest() {
         DeleteCustomerPage deleteCustomerPage = new DeleteCustomerPage(driver);
         SortCustomerPage sortCustomerPage = new SortCustomerPage(driver);
