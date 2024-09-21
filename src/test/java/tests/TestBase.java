@@ -1,12 +1,11 @@
 package tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.net.URL;
 import java.time.Duration;
 
 public class TestBase {
@@ -18,8 +17,8 @@ public class TestBase {
 
     public String url = "https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager";
 
-    @Before
-    public void setUP() {
+    @BeforeAll
+    public static void setUP() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -27,8 +26,8 @@ public class TestBase {
         TestBase.setDriver(driver);
     }
 
-    @After
-    public void tearDown(){
+    @AfterAll
+    public static void tearDown(){
         driver.quit();
     }
 }

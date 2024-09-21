@@ -30,12 +30,22 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- JUnit 4 для написания и запуска тестов -->
+            <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.13.2</version>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>5.9.3</version>
+                <scope>test</scope>
             </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>5.9.3</version>
+                <scope>test</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -62,19 +72,15 @@
             <version>5.8.0</version>
         </dependency>
 
-        <!-- Поддержка Allure для JUnit 4 -->
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-junit5 -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit4</artifactId>
+            <artifactId>allure-junit5</artifactId>
+            <version>2.22.0</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- Поддержка AspectJ для интеграции Allure с JUnit 4 -->
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit4-aspect</artifactId>
-            <scope>test</scope>
-        </dependency>
+
 
         <!-- Логгер SLF4J для вывода сообщений в консоль -->
         <dependency>
@@ -86,32 +92,30 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
 
     <build>
         <plugins>
-            <!-- Плагин Maven Surefire для запуска тестов -->
+
+            <!-- Add the following options to your maven-surefire-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
+                <version>3.2.3</version>
                 <configuration>
-                    <testFailureIgnore>false</testFailureIgnore>
+                    <parallel>both</parallel>
+                    <threadCount>4</threadCount>
+                    <forkCount>2</forkCount>
+                    <reuseForks>true</reuseForks>
                     <argLine>
-                        -Dfile.encoding=${project.build.sourceEncoding}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                    <properties>
-                        <property>
-                            <name>listener</name>
-                            <value>io.qameta.allure.junit4.AllureJunit4</value>
-                        </property>
-                    </properties>
                 </configuration>
                 <dependencies>
-                    <!-- AspectJ для работы с аннотациями Allure -->
                     <dependency>
                         <groupId>org.aspectj</groupId>
                         <artifactId>aspectjweaver</artifactId>

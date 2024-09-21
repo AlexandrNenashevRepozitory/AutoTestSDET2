@@ -7,7 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import tests.TestBase;
 
-import java.net.URL;
 import java.util.Random;
 
 

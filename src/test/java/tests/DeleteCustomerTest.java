@@ -1,9 +1,9 @@
 package tests;
 
 import io.qameta.allure.Step;
-import io.qameta.allure.junit4.DisplayName;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 import pages.DeleteCustomerPage;
 import pages.SortCustomerPage;
 
@@ -22,8 +22,6 @@ public class DeleteCustomerTest extends TestBase {
         String nameToDelete = deleteCustomerPage.nameToDelete(customerNames);
         deleteCustomerPage.clickDeleteName(nameToDelete);
         List<String> extendedCustomerNames = deleteCustomerPage.getCustomerNames();
-        Assert.assertEquals(customerNames.size(), extendedCustomerNames.size() + 1);
+        Assertions.assertEquals(customerNames.size(), extendedCustomerNames.size() + 1);
     }
-
-
 }

@@ -1,10 +1,10 @@
 package tests;
 
 import io.qameta.allure.Step;
-import io.qameta.allure.junit4.DisplayName;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 import pages.SortCustomerPage;
+import org.junit.jupiter.api.DisplayName;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +22,7 @@ public class SortCustomerTest extends TestBase {
         List<String> sortedNames = customerNames.stream()
                 .sorted()
                 .collect(Collectors.toList());
-        Assert.assertEquals("Список клиентов не отсортирован по имени", sortedNames, customerNames);
+        Assertions.assertEquals(sortedNames, customerNames);
     }
 }
 

@@ -2,12 +2,13 @@ package tests;
 
 
 import io.qameta.allure.Step;
-import io.qameta.allure.junit4.DisplayName;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.Alert;
 import pages.AddCustomerPage;
 import pages.SortCustomerPage;
+
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class AddCustomerTest extends TestBase {
         alert.accept();
         sortCustomerPage.clickMenuSortCustomer();
         List<String> extendedCustomerNames = sortCustomerPage.getCustomerNames();
-        Assert.assertEquals(customerNames.size(), extendedCustomerNames.size() - 1);
+        Assertions.assertEquals(customerNames.size(), extendedCustomerNames.size() - 1);
     }
 
 
@@ -43,7 +44,7 @@ public class AddCustomerTest extends TestBase {
     public void generatePostCodeTest() {
         AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
         String postCode = addCustomerPage.generatePostCode();
-        Assert.assertEquals(postCode.length(), 10);
+        Assertions.assertEquals(postCode.length(), 10);
     }
 
 
@@ -54,7 +55,7 @@ public class AddCustomerTest extends TestBase {
         AddCustomerPage addCustomerPage = new AddCustomerPage(driver);
         String postCode = addCustomerPage.generatePostCode();
         String firstName = addCustomerPage.generateFirstName(postCode);
-        Assert.assertEquals(firstName.length(), 5);
+        Assertions.assertEquals(firstName.length(), 5);
     }
 
 }
