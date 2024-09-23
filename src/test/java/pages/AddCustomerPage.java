@@ -1,24 +1,21 @@
 package pages;
 
 
+import projectStorage.StorageString;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import tests.TestBase;
 
 import java.util.Random;
 
 
 public class AddCustomerPage {
 
-    private final WebDriver driver;
-    TestBase testBase = new TestBase();
-
     public AddCustomerPage(WebDriver driver) {
-        this.driver = driver;
         PageFactory.initElements(driver, this);
-        driver.get(testBase.url);
+        driver.get(StorageString.url);
     }
 
 
@@ -40,27 +37,32 @@ public class AddCustomerPage {
 
 
     // Логика заполнения формы
+    @Step("Нажатие на кнопку \"Add Customer\"")
     public void clickMenuButtonAddCustomer() {
         ButtonMenuAddCustomer.click();
     }
-
+    @Step("Заполнение поля \"First Name\"")
     public void inputFirstName(String firstName) {
         FirstName.sendKeys(firstName);
     }
 
+    @Step("Заполнение поля \"Last Name\"")
     public void inputLastName(String lastName) {
         LastName.sendKeys(lastName);
     }
+
+    @Step("Заполнение поля \"Post Code\"")
     public void inputPostCode(String postCode) {
         PostCode.sendKeys(postCode);
     }
 
+    @Step("Нажатие на кнопку \"Add Customer\" (Submit)")
     public void clickSubmitAddCustomer() {
         SubmitAddCustomer.click();
     }
 
 
-    // Генерация числа для поля PostCode
+    @Step("Герация случайного PostCode")
     public String generatePostCode() {
         StringBuilder postCode = new StringBuilder();
         Random r = new Random();
@@ -72,7 +74,7 @@ public class AddCustomerPage {
     }
 
 
-    // Генерация имени для поля FirstName
+    @Step("Генерация FirstName")
     public String generateFirstName(String postCode) {
         StringBuilder firstName = new StringBuilder();
         for (int i = 0; i < postCode.length(); i += 2) {

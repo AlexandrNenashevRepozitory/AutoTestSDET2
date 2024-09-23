@@ -1,5 +1,6 @@
 package tests;
 
+import projectStorage.StorageString;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,8 +16,6 @@ public class TestBase {
         driver = webDriver;
     }
 
-    public String url = "https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager";
-
     @BeforeAll
     public static void setUP() {
         WebDriverManager.chromedriver().setup();
@@ -24,10 +23,10 @@ public class TestBase {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         TestBase.setDriver(driver);
+        driver.get(StorageString.url);
     }
-
     @AfterAll
     public static void tearDown(){
         driver.quit();
-    }
+   }
 }

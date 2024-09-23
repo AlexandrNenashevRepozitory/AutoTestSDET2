@@ -1,12 +1,13 @@
 package pages;
 
+import projectStorage.StorageString;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import tests.TestBase;
 
 
 import java.util.List;
@@ -17,12 +18,11 @@ import java.util.stream.Collectors;
 public class SortCustomerPage {
 
     private final WebDriver driver;
-    TestBase testBase = new TestBase();
 
     public SortCustomerPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        driver.get(testBase.url);
+        driver.get(StorageString.url);
     }
 
 
@@ -33,15 +33,18 @@ public class SortCustomerPage {
     @FindBy(xpath = "//*[@ng-click=\"sortType = 'fName'; sortReverse = !sortReverse\"]")
     private static WebElement SortCustomer;
 
-    @FindBy(css = "tbody tr td:nth-child(1)")
-    private List<WebElement> customerNameElements;
+    @FindBy(css = "tbody > tr > td:first-child")
+    private List<WebElement> nameElements;
 
 
     // Логика заполнения формы
+
+    @Step("Нажатие на кнопку \"Customers\"")
     public void clickMenuSortCustomer() {
         MenuCustomer.click();
     }
 
+    @Step("Двойной клик на полю \"firstName\" для сортировки в алфавитном порядке")
     public void clickSortCustomer() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         wait.until(ExpectedConditions.elementToBeClickable(SortCustomer));
@@ -52,7 +55,7 @@ public class SortCustomerPage {
 
     // Метод для получения списка имён клиентов
     public List<String> getCustomerNames() {
-        return customerNameElements.stream()
+        return nameElements.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }

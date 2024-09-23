@@ -1,11 +1,12 @@
 package pages;
 
+import projectStorage.StorageString;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import tests.TestBase;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,12 +15,11 @@ import java.util.stream.Collectors;
 public class DeleteCustomerPage {
 
     private final WebDriver driver;
-    TestBase testBase = new TestBase();
 
     public DeleteCustomerPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        driver.get(testBase.url);
+        driver.get(StorageString.url);
     }
 
 
@@ -27,11 +27,8 @@ public class DeleteCustomerPage {
     @FindBy(css = "[ng-click='showCust()']")
     private WebElement MenuCustomers;
 
-    @FindBy(css = "tbody tr td:nth-child(1)")
-    private List<WebElement> NameElements;
-
-    @FindBy(css = "tbody tr td:nth-child(1)")
-    private List<WebElement> customerNameElements;
+    @FindBy(css = "tbody > tr > td:first-child")
+    private List<WebElement> nameElements;
 
 
     public void clickMenuSortCustomer() {
@@ -41,16 +38,16 @@ public class DeleteCustomerPage {
 
     // Метод для получения списка имён клиентов
     public List<String> getCustomerNames() {
-        return customerNameElements.stream()
+        return nameElements.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
 
-
+    @Step("Поиск нужного клиента")
     // Метод для нахождения имени клиента, который будет удалён
     public String nameToDelete(List<String> names) {
 
-        int average = (int) NameElements.stream()
+        int average = (int) nameElements.stream()
                 .map(webElement -> webElement.getText())
                 .mapToInt(text -> text.length())
                 .average()
@@ -77,7 +74,7 @@ public class DeleteCustomerPage {
         return driver.findElement(By.xpath("//td[text()='" + nameToDelete + "']/following-sibling::td/button[contains(text(),'Delete')]"));
     }
 
-
+    @Step("Удаление клиента")
     public void clickDeleteName(String nameToDelete) {
         findButtonDelete(nameToDelete).click();
     }
