@@ -11,7 +11,6 @@ import java.time.Duration;
 
 public class TestBase {
     public static WebDriver driver;
-
     public static void setDriver(WebDriver webDriver) {
         driver = webDriver;
     }

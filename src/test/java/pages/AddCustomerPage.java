@@ -1,6 +1,5 @@
 package pages;
 
-
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +11,6 @@ import java.util.Random;
 
 
 public class AddCustomerPage {
-
     // Поиск элементов
     @FindBy(xpath = "//*[@ng-click='addCust()']")
     private static WebElement ButtonMenuAddCustomer;
@@ -56,7 +54,6 @@ public class AddCustomerPage {
         SubmitAddCustomer.click();
     }
 
-
     @Step("Герация случайного PostCode")
     public String generatePostCode() {
         StringBuilder postCode = new StringBuilder();
@@ -67,7 +64,6 @@ public class AddCustomerPage {
         }
         return postCode.toString();
     }
-
 
     @Step("Генерация FirstName")
     public String generateFirstName(String postCode) {

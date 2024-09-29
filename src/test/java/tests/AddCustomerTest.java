@@ -15,14 +15,12 @@ import java.util.List;
 
 
 public class AddCustomerTest extends TestBase {
-
     private static AddCustomerPage addCustomerPage;
 
     @BeforeAll
     public static void setAddCustomer() {
         addCustomerPage = new AddCustomerPage(driver);
     }
-
 
     @Test
     @Step("Новый пользователь добавлен")
@@ -45,7 +43,6 @@ public class AddCustomerTest extends TestBase {
         Assertions.assertEquals(customerNames.size(), extendedCustomerNames.size() - 1);
     }
 
-
     @Test
     @Step("Длина почтового индекса 10 знаков")
     @DisplayName("Проверка длины почтового индекса")
@@ -53,7 +50,6 @@ public class AddCustomerTest extends TestBase {
         String postCode = addCustomerPage.generatePostCode();
         Assertions.assertEquals(postCode.length(), 10);
     }
-
 
     @Test
     @Step("Длина имени 5 знаков")

@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SortCustomerTest extends TestBase {
-
     @Test
     @Step("Список клиентов отсортирован по имени")
     @DisplayName("Проверка сортировки клиентов по имени в таблице Customers")

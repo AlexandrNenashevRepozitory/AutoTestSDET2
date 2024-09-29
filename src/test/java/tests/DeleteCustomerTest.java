@@ -10,7 +10,6 @@ import pages.SortCustomerPage;
 import java.util.List;
 
 public class DeleteCustomerTest extends TestBase {
-
     @Test
     @Step("Пользователь удалён")
     @DisplayName("Проверка удаления пользователя")

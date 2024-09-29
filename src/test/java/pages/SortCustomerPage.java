@@ -15,23 +15,20 @@ import java.util.stream.Collectors;
 
 
 public class SortCustomerPage {
-    private final WebDriver driver;
-
     // Поиск элементов
     @FindBy(css = "[ng-click='showCust()']")
     private static WebElement MenuCustomer;
     @FindBy(xpath = "//*[contains(@ng-click, \"sortType = 'fName'\")]")
     private static WebElement SortCustomer;
+    private final WebDriver driver;
     @FindBy(xpath = "//table//tbody//tr/td[1]")
     private List<WebElement> nameElements;
-
 
     public SortCustomerPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         driver.get(StorageString.URL);
     }
-
 
     // Логика заполнения формы
     @Step("Нажатие на кнопку \"Customers\"")

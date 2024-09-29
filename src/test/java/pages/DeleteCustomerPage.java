@@ -13,13 +13,12 @@ import java.util.stream.Collectors;
 
 
 public class DeleteCustomerPage {
-
     private final WebDriver driver;
 
     // Поиск элементов
     @FindBy(css = "[ng-click='showCust()']")
     private WebElement MenuCustomers;
-    @FindBy(css = "tbody > tr > td:first-child")
+    @FindBy(xpath = "//table//tbody//tr/td[1]")
     private List<WebElement> nameElements;
 
     public DeleteCustomerPage(WebDriver driver) {
@@ -65,7 +64,6 @@ public class DeleteCustomerPage {
         }
         return nameToDelete;
     }
-
 
     public WebElement findButtonDelete(String nameToDelete) {
         return driver.findElement(By.xpath("//td[text()='" + nameToDelete + "']/following-sibling::td/button[contains(text(),'Delete')]"));
