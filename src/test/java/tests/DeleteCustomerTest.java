@@ -1,9 +1,9 @@
 package tests;
 
 import io.qameta.allure.Step;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
 import pages.DeleteCustomerPage;
 import pages.SortCustomerPage;
 

@@ -1,12 +1,12 @@
 package pages;
 
-import projectStorage.StorageString;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import projectStorage.StorageString;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,20 +16,17 @@ public class DeleteCustomerPage {
 
     private final WebDriver driver;
 
-    public DeleteCustomerPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        driver.get(StorageString.url);
-    }
-
-
     // Поиск элементов
     @FindBy(css = "[ng-click='showCust()']")
     private WebElement MenuCustomers;
-
     @FindBy(css = "tbody > tr > td:first-child")
     private List<WebElement> nameElements;
 
+    public DeleteCustomerPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        driver.get(StorageString.URL);
+    }
 
     public void clickMenuSortCustomer() {
         MenuCustomers.click();

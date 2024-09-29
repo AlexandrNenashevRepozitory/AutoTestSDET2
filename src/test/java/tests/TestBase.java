@@ -1,11 +1,11 @@
 package tests;
 
-import projectStorage.StorageString;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import projectStorage.StorageString;
 
 import java.time.Duration;
 
@@ -23,10 +23,11 @@ public class TestBase {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         TestBase.setDriver(driver);
-        driver.get(StorageString.url);
+        driver.get(StorageString.URL);
     }
+
     @AfterAll
-    public static void tearDown(){
+    public static void tearDown() {
         driver.quit();
-   }
+    }
 }

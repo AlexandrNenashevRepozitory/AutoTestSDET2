@@ -1,10 +1,10 @@
 package tests;
 
 import io.qameta.allure.Step;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import pages.SortCustomerPage;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import pages.SortCustomerPage;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +24,7 @@ public class SortCustomerTest extends TestBase {
                 .collect(Collectors.toList());
         Assertions.assertEquals(sortedNames, customerNames);
     }
+
 }
 
 
